@@ -1,8 +1,14 @@
 angular.module('controllers', [])
 
-.controller('ScheduleCtrl', function($scope) {})
+.controller('ScheduleCtrl', function($scope, ScheduleService) {
+    $scope.schedules = ScheduleService.all();
+    console.log($scope.schedules);
+    $scope.remove = function(schedule) {
+    ScheduleService.remove(schedule);
+  };
+})
 
-.controller('GradeCtrl', function($scope, ScheduleService) {
+.controller('GradeCtrl', function($scope) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -10,11 +16,6 @@ angular.module('controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-
-  $scope.schedules = ScheduleService.all();
-  $scope.remove = function(schedule) {
-    ScheduleService.remove(schedule);
-  };
 })
 
 .controller('AccountCtrl', function($scope) {
