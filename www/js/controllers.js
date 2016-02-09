@@ -12,6 +12,7 @@ angular.module('controllers', [])
   $scope.labels = GradeService.getObjects('labels');
   $scope.series = GradeService.getObjects('series');
   $scope.grades = GradeService.getObjects('grades');
+  $scope.yours = GradeService.getObjects('yours');
 
 })
 

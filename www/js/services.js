@@ -44,24 +44,28 @@ angular.module('services', [])
   this.average = [65, 59, 80, 81, 56, 55, 40];
   this.grades = [this.yours,this.average];
 
+
   this.getObjects = function(name){
     switch(name){
-   
+
       case 'labels':
       return this.labels;
       break;
-      
+
       case 'series':
       return this.series;
       break;
-      
+
       case 'grades':
       return this.grades;
       break;
+
+      case 'yours':
+      return  this.yours;
+      break;
+
     }
   };
 
 
 });
-
-

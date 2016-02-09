@@ -3,6 +3,13 @@
     <canvas id="line" class="chart chart-line" chart-data="grades"
   chart-labels="labels" chart-legend="true" chart-series="series"
   chart-click="onClick" >
-	</canvas> 
+    </canvas>
+
+  <ion-list>
+    <ion-item ng-repeat = 'your in yours'>
+      {{your}}
+    </ion-item>
+  </ion-list>
+
   </ion-content>
 </ion-view>
