@@ -1,5 +1,5 @@
 <ion-view hide-nav-bar="true" hide-back-button="true">
-  <ion-content>
+  <ion-content scroll="false">
       <canvas id="line" class="chart chart-line" chart-data="grades"
         chart-labels="labels" chart-legend="true" chart-series="series"
         height="250"
@@ -13,6 +13,7 @@
         <div class="col"> Score </div>
       </div>
     </ion-item>
+    <ion-scroll direction="y" style="height:150px" >
     <ion-item collection-repeat = 'your in yours'>
       <div class="row">
         <div class="col" > {{labels[$index]}} </div>
@@ -20,7 +21,7 @@
         <div class="col"> {{your}} </div>
       </div>
     </ion-item>
+  </ion-scroll>
   </ion-list>
-
   </ion-content>
 </ion-view>
