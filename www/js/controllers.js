@@ -16,6 +16,11 @@ angular.module('controllers', [])
 
 })
 
+.controller('PolarAreaCtrl', function ($scope, GradeService) {
+  $scope.labels = GradeService.getObjects('labels');
+  $scope.yours = GradeService.getObjects('yours');
+})
+
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true

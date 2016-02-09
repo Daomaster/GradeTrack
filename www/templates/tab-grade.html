@@ -1,10 +1,31 @@
 <ion-view hide-nav-bar="true" hide-back-button="true">
   <ion-content scroll="false">
-      <canvas id="line" class="chart chart-line" chart-data="grades"
-        chart-labels="labels" chart-legend="true" chart-series="series"
-        height="250"
-        chart-click="onClick" >
-      </canvas>
+
+
+    <ion-slide-box>
+
+       <ion-slide>
+          <div class = "box gradeAve">
+            <canvas id="line" class="chart chart-line" chart-data="grades"
+              chart-labels="labels" chart-legend="true" chart-series="series"
+              height="250"
+              chart-click="onClick" >
+            </canvas>
+          </div>
+       </ion-slide>
+
+       <ion-slide>
+          <div class = "box gradeAll">
+            <canvas id="polar-area" class="chart chart-polar-area"
+             chart-data="grades" chart-labels="labels"
+              height="250" >
+            </canvas>
+          </div>
+       </ion-slide>
+    </ion-slide-box>
+
+
+
   <ion-list>
     <ion-item style="border-color:#387ef5">
       <div class="row">
