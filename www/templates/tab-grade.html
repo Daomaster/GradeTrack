@@ -6,8 +6,12 @@
     </canvas>
 
   <ion-list>
-    <ion-item ng-repeat = 'your in yours'>
-      {{your}}
+    <ion-item collection-repeat = 'your in yours'>
+      <div class="row">
+        <div class="col" > {{labels[$index]}} </div>
+        <div class="col"> </div>
+        <div class="col"> {{your}} </div>
+      </div>
     </ion-item>
   </ion-list>
 
