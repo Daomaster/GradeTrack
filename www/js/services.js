@@ -42,7 +42,7 @@ angular.module('services', [])
   this.series = ['Average', 'Yours'];
   this.yours = [28, 48, 40, 19, 86, 27, 90];
   this.average = [65, 59, 80, 81, 56, 55, 40];
-  this.grades = [this.yours,this.average];
+  this.grades = [this.average,this.yours];
 
 
   this.getObjects = function(name){
