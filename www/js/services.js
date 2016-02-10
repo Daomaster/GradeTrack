@@ -6,15 +6,18 @@ angular.module('services', [])
   // Some fake testing data
   var shcedules = [
     {
-      time : "11:40 pm",
+      label: "Quiz 1",
+      time : "Jan 1st 11:40 am",
       id : 1
     },
     {
-      time : "11:50 pm",
+      label: "Quiz 2",
+      time : "Jan 12th 10:40 am",
       id : 2
     },
     {
-      time : "11:20 pm",
+      label: "Quiz 3",
+    time : "Jan 20th 1:40 pm",
       id : 3
     }
   ];
