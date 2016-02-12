@@ -6,15 +6,18 @@ angular.module('services', [])
   // Some fake testing data
   var shcedules = [
     {
-      time : "11:40 pm",
+      label: "Quiz 1",
+      time : "Jan 1st 11:40 am",
       id : 1
     },
     {
-      time : "11:50 pm",
+      label: "Quiz 2",
+      time : "Jan 12th 10:40 am",
       id : 2
     },
     {
-      time : "11:20 pm",
+      label: "Quiz 3",
+    time : "Jan 20th 1:40 pm",
       id : 3
     }
   ];
@@ -42,8 +45,11 @@ angular.module('services', [])
   this.series = ['Average', 'Yours'];
   this.yours = [28, 48, 40, 19, 86, 27, 90];
   this.average = [65, 59, 80, 81, 56, 55, 40];
+
   this.grades = [this.yours,this.average];
-  //thiness = 29;
+
+  //this.grades = [this.average,this.yours];
+
 
   this.getObjects = function(name){
     switch(name){

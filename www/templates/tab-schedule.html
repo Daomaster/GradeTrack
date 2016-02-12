@@ -1,10 +1,15 @@
 <ion-view hide-nav-bar="true" hide-back-button="true">
   <ion-content class="padding">
    	<ion-list show-delete= true>
-    <ion-item collection-repeat = 'schedule in schedules'>
-      {{ schedule.time }}
-       <ion-delete-button ng-click= "remove(schedule.id)"class="ion-minus-circled"></ion-delete-button>
-    </ion-item>
-	</ion-list>
+      <div class="card" ng-repeat="schedule in schedules">
+          <div class="item item-divider" style="background-color:#add8e6">
+              <div style="font-size:20px">{{schedule.label}}</div>
+          </div>
+          <div class="item item-text-wrap">
+              <p/>
+              <strong>Time: &nbsp; {{schedule.time}}</strong>
+          </div>
+      </div>
+   </ion-list>
   </ion-content>
 </ion-view>
