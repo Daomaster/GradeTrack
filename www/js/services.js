@@ -43,7 +43,7 @@ angular.module('services', [])
   this.yours = [28, 48, 40, 19, 86, 27, 90];
   this.average = [65, 59, 80, 81, 56, 55, 40];
   this.grades = [this.yours,this.average];
-
+  //thiness = 29;
 
   this.getObjects = function(name){
     switch(name){
