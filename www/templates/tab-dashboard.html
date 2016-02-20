@@ -1,0 +1,62 @@
+<ion-view hide-nav-bar="true" hide-back-button="true">
+  <<ion-content>
+    <ion-list>
+		<div ng-repeat="group in groups">
+      <ion-item class="item-stable"
+				ng-click ="toggleGroup(group)"
+				ng-class="{active: isGroupShow(group)}" >
+			<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+			<span class="className">{{ group.name }}</span>
+			<span class="classGrade">{{getGradeLetter(getGradePercentage(group))}}</span>
+		</ion-item>
+		<ion-item class ="item-accordion"
+			ng-show="isGroupShown(group)">
+			<ul class="dbNextAssignment">
+				<li>
+					<span class="listTitle">Next Assignment Due</span>
+					<span class="listValue">{{getEarliestDue(group).name}}</span>
+				</li>
+				<li>
+					<span class="listValue">{{getEarliestDue(group).duedate | date}}
+				</li>
+			</ul>
+		</ion-item>
+				
+				
+		<ion-item class ="item-accordion"
+			ng-show="isGroupShown(group)">
+			<span class="listTitle">Assignments Completed</span>
+			<span  class="listValue">{{getCompletedAssignments(group)}}/{{group.items.length}}
+				  ({{getCompletedAssignments(group) / group.items.length *100 | number:0}}%}</span>
+		</ion-item>
+		
+		<ion-item class ="item-accordion"
+			ng-show="isGroupShown(group)">
+			<ul class="dbPoints">
+				<li>
+					<span class="listTitle">Points Possible</span>
+					<span class="listValue">{{getPossiblePoints(group)}}</span>
+				</li>
+				<li>
+					<span class="listSubTitle">Earned</span>
+					<span class="listValue">{{getEarnedPoints(group)}}</span>
+				</li>
+				<li>
+					<span class="listSubTitle">Total</span>
+					<span class="listValue">{{getTotalPoints(group)}}</span>
+				</li>
+				<li>
+					<span class="listSubTitle">Earnable Points Remaining</span>
+					<span class="listValue">{{getTotalPoints(group) - getPossiblePoints(group)}}</span>
+				</li>
+			</ul>
+		</ion-item>
+		<ion-item class ="item-accordion"
+			ng-show="isGroupShown(group)">
+				<span class="listTitle"> Overall Grade </span>
+				<span class="listValue">{{getGradePercentage(group)*100 | number:0}}%</span>
+		</ion-item>
+	  </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
