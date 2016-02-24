@@ -81,6 +81,6 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'chart.js'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/schedule');
+  $urlRouterProvider.otherwise('/tab/dashboard');
 
 });

@@ -1,5 +1,5 @@
 <ion-view hide-nav-bar="true" hide-back-button="true">
-  <<ion-content>
+  <ion-content>
     <ion-list>
 		<div ng-repeat="group in groups">
       <ion-item class="item-stable"
@@ -7,7 +7,7 @@
 				ng-class="{active: isGroupShow(group)}" >
 			<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
 			<span class="className">{{ group.name }}</span>
-			<span class="classGrade">{{getGradeLetter(getGradePercentage(group))}}</span>
+			<span class="classGrade">{{classLetterGrade(group)}}</span>
 		</ion-item>
 		<ion-item class ="item-accordion"
 			ng-show="isGroupShown(group)">
@@ -17,7 +17,7 @@
 					<span class="listValue">{{getEarliestDue(group).name}}</span>
 				</li>
 				<li>
-					<span class="listValue">{{getEarliestDue(group).duedate | date}}
+					<span class="listValue">{{getEarliestDue(group).dueDate | date}}
 				</li>
 			</ul>
 		</ion-item>
@@ -26,8 +26,8 @@
 		<ion-item class ="item-accordion"
 			ng-show="isGroupShown(group)">
 			<span class="listTitle">Assignments Completed</span>
-			<span  class="listValue">{{getCompletedAssignments(group)}}/{{group.items.length}}
-				  ({{getCompletedAssignments(group) / group.items.length *100 | number:0}}%}</span>
+			<span  class="listValue">{{getCompletedAssignments(group)}}/{{getTotalAssignments(group)}}
+				  ({{getCompletedAssignments(group) / getTotalAssignments(group) *100 | number:0}}%}</span>
 		</ion-item>
 		
 		<ion-item class ="item-accordion"
@@ -54,7 +54,7 @@
 		<ion-item class ="item-accordion"
 			ng-show="isGroupShown(group)">
 				<span class="listTitle"> Overall Grade </span>
-				<span class="listValue">{{getGradePercentage(group)*100 | number:0}}%</span>
+				<span class="listValue">{{classPercent(group)*100 | number:0}}%</span>
 		</ion-item>
 	  </div>
     </ion-list>
