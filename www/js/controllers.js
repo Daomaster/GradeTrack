@@ -5,6 +5,13 @@ angular.module('controllers', [])
     $scope.remove = function(scheduleId) {
     ScheduleService.remove(scheduleId);
   };
+	$scope.plusOne = function(index) {
+		ScheduleService.plusOne(index);
+	};
+	
+	$scope.minusOne = function(index) {
+		ScheduleService.plusOne(index);
+	};
 })
 
 .controller('GradeCtrl', function($scope, GradeService) {
