@@ -5,13 +5,6 @@
           <div class="item item-divider" style="background-color:{{schedule.classId}}">
               <div style="font-size:20px; display:inline">
 				{{schedule.label}}
-				<span style="float:right">
-					{{schedule.difficulty}}
-					<!--add button to the right to increase difficulty-->
-					<!--prolly better to create a class which defines this positioning-->
-					<span ng-click="plusOne($index)">+</span>
-					<span ng-click="minusOne($index)">-</span>
-				</span>
 			  </div>
           </div>
           <div class="item item-text-wrap">
