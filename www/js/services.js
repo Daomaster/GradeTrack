@@ -2,7 +2,9 @@ angular.module('services', [])
 
 .factory('ScheduleService', function() {
   // Might use a resource here that returns a JSON array
-
+  var showReorderBtn = false;
+  var paddingFromRight = 0;
+  
   // Some fake testing data
   var schedules = [
     {
@@ -61,7 +63,23 @@ angular.module('services', [])
         }
       }
       return null;
-    }
+    },
+	moveItem: function(item, fromIndex, toIndex) {
+		//Move the item in the array
+		schedules.splice(fromIndex, 1);
+		schedules.splice(toIndex, 0, item);
+	},
+	toggleShowReorder: function() {
+		showReorderBtn = !showReorderBtn;
+		if (showReorderBtn) {
+			paddingFromRight = 9;
+		} else {
+			paddingFromRight = 0;
+		}
+	},
+	getReorder: function() {
+		return {show: showReorderBtn, pad: paddingFromRight};
+	}
   };
 })
 

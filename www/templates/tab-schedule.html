@@ -1,6 +1,5 @@
 <ion-view hide-nav-bar="true" hide-back-button="true">
-  <ion-content class="padding">
-   	<ion-list show-delete= true>
+   	<!--<ion-list show-delete= true>
       <div class="card" ng-repeat="schedule in schedules">
           <div class="item item-divider" style="background-color:{{schedule.classId}}">
               <div style="font-size:20px; display:inline">
@@ -15,6 +14,30 @@
 			  </span>
           </div>
       </div>
-   </ion-list>
-  </ion-content>
+   </ion-list>-->
+   
+	<ion-header-bar class="bar-positive">
+		<h1 class="title">Assignments</h1>
+		<div class="buttons">
+			<button class="button" ng-click="toggleShowReorder()">Reorder</button>
+		</div>
+	</ion-header-bar>
+	
+	<ion-content>
+		<ion-list show-reorder="getReorder().show">
+			<ion-item collection-repeat="item in schedules" ng-style="{'background-color':item.classId}">
+				{{item.label}}
+				<br />
+				<strong>Due: {{item.time | date: "MMM d"}}</strong>
+				
+				<span style="float:right; padding-right: {{getReorder().pad}}%">
+					{{item.note}}
+				</span>
+				<ion-reorder-button class="ion-navicon"
+					on-reorder="moveItem(item, $fromIndex, $toIndex)">
+				</ion-reorder-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+	
 </ion-view>
