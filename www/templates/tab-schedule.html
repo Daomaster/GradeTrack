@@ -25,7 +25,10 @@
 	
 	<ion-content>
 		<ion-list show-reorder="getReorder().show">
-			<ion-item collection-repeat="item in schedules" ng-style="{'background-color':item.classId}">
+			<!--<ion-item collection-repeat="item in schedules" ng-style="{'background-color':item.classId}">-->
+			
+			<!-- There are some issues with collection-repeat and reordering: Drag any item below the first into first item to see-->
+			<ion-item ng-repeat="item in schedules" ng-style="{'background-color':item.classId}">
 				{{item.label}}
 				<br />
 				<strong>Due: {{item.time | date: "MMM d"}}</strong>
