@@ -35,7 +35,8 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'chart.js'])
     .state('lists', {
     url: '/lists',
     abstract: true,
-    templateUrl: 'templates/lists.html'
+    templateUrl: 'templates/lists.html',
+    controller: 'ListCtrl'
   })
 
   // Each tab has its own nav history stack:

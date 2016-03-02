@@ -16,6 +16,15 @@ angular.module('controllers', [])
 
 })
 
+.controller('ListCtrl', function($scope,$state) {
+
+  $scope.account = function(){ $state.go('lists.account');};
+  $scope.grade = function(){$state.go('lists.grade');};
+  $scope.schedule = function(){$state.go('lists.schedule');};
+
+})
+
+
 .controller('PolarAreaCtrl', function ($scope, GradeService) {
   $scope.labels = GradeService.getObjects('labels');
   $scope.yours = GradeService.getObjects('yours');
