@@ -37,17 +37,25 @@
 
     </ion-slide-box>
 
-    <div class="tabs">
-      <a class="tab-item">
-        Class-1
-      </a>
-      <a class="tab-item">
-        Class-2
-      </a>
-      <a class="tab-item">
-        Class-3
-      </a>
-    </div>
+    <ion-tabs class="tabs-icon-top">
+
+     <!-- Class 1 Tab -->
+     <ion-tab title="Class 1">
+     <ion-nav-view name="tab-grade"></ion-nav-view>
+     </ion-tab>
+
+     <!-- Class 2 Tab -->
+     <ion-tab title="Class 2">
+     <ion-nav-view name="tab-grade"></ion-nav-view>
+     </ion-tab>
+
+     <!-- Class 3 Tab    ? href="#/tab/account" ?-->
+     <ion-tab title="Class 3">
+     <ion-nav-view name="tab-gade"></ion-nav-view>
+     </ion-tab>
+
+
+    </ion-tabs>
 
   </ion-content>
 </ion-view>
