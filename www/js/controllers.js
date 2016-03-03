@@ -7,12 +7,16 @@ angular.module('controllers', [])
   };
 })
 
-.controller('GradeCtrl', function($scope, GradeService) {
+.controller('GradeCtrl', function($scope, $window, GradeService) {
 
   $scope.labels = GradeService.getObjects('labels');
   $scope.series = GradeService.getObjects('series');
   $scope.grades = GradeService.getObjects('grades');
   $scope.yours = GradeService.getObjects('yours');
+  $scope.width = $window.innerWidth;
+  console.log($scope.width);
+  $scope.height = $window.innerHeight;
+  console.log($scope.height);
 
 })
 
