@@ -8,42 +8,46 @@
           <div class = "box gradeAve">
             <canvas id="line" class="chart chart-line" chart-data="grades"
               chart-labels="labels" chart-legend="true" chart-series="series"
-              height="250"
+              height=" 400 %"
               chart-click="onClick" >
             </canvas>
           </div>
        </ion-slide>
 
        <ion-slide>
-          <div class = "box gradeAll">
-            <canvas id="pie" class="chart chart-pie"
-            chart-data="yours" chart-labels="labels" height="250">
-          </canvas>
-          </div>
-       </ion-slide>
-
-      
+         <ion-list>
+         <ion-item style="background-color:#ADD8E6">
+           <div class="row">
+             <div class="col" style="color:#F8F8FF"><b> Name </b></div>
+             <div class="col"> </div>
+             <div class="col" style="color:#F8F8FF"><b> Score </b></div>
+           </div>
+          </ion-item>
+          <ion-scroll direction="y" style="height:300px" >
+            <ion-item collection-repeat = 'your in yours'>
+              <div class="row">
+                <div class="col" > {{labels[$index]}} </div>
+                <div class="col"> </div>
+                <div class="col"> {{your}} </div>
+              </div>
+            </ion-item>
+          </ion-scroll>
+        </ion-list>
+      </ion-slide>
 
     </ion-slide-box>
 
+    <div class="tabs">
+      <a class="tab-item">
+        Class-1
+      </a>
+      <a class="tab-item">
+        Class-2
+      </a>
+      <a class="tab-item">
+        Class-3
+      </a>
+    </div>
 
-  <ion-list>
-    <ion-item style="background-color:#ADD8E6">
-      <div class="row">
-        <div class="col" style="color:#F8F8FF"><b> Name </b></div>
-        <div class="col"> </div>
-        <div class="col" style="color:#F8F8FF"><b> Score </b></div>
-      </div>
-    </ion-item>
-    <ion-scroll direction="y" style="height:150px" >
-    <ion-item collection-repeat = 'your in yours'>
-      <div class="row">
-        <div class="col" > {{labels[$index]}} </div>
-        <div class="col"> </div>
-        <div class="col"> {{your}} </div>
-      </div>
-    </ion-item>
-  </ion-scroll>
-  </ion-list>
   </ion-content>
 </ion-view>
