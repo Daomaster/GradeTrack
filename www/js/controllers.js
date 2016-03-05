@@ -38,4 +38,8 @@ angular.module('controllers', [])
   $scope.settings = {
     enableFriends: true
   };
+  $scope.login = function() {
+    console.log("login Clicked")
+  };
+
 });
