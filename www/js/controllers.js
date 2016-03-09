@@ -3,8 +3,20 @@ angular.module('controllers', [])
 .controller('ScheduleCtrl', function($scope, ScheduleService) {
     $scope.schedules = ScheduleService.all();
     $scope.remove = function(scheduleId) {
-    ScheduleService.remove(scheduleId);
+		ScheduleService.remove(scheduleId);
+	};
+  
+	$scope.moveItem = function(item, fromIndex, toIndex) {
+		ScheduleService.moveItem(item, fromIndex, toIndex);
   };
+  
+	$scope.toggleShowReorder = function() {
+		ScheduleService.toggleShowReorder();
+	}
+	
+	$scope.getReorder = function() {
+		return ScheduleService.getReorder();
+	}
 })
 
 .controller('GradeCtrl', function($scope, $window, GradeService) {

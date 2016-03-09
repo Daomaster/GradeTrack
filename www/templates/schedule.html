@@ -1,15 +1,47 @@
-<ion-view view-title="Schedule" enable-menu-with-back-views="false">
-  <ion-content class="padding">
-   	<ion-list show-delete= true>
+<!--Keep view-title="Schedule" and check enable-menu-with-back-views="false", ask why show-delete=true-->
+<ion-view view-title="Schedule" hide-nav-bar="true" hide-back-button="true">
+   	<!--<ion-list show-delete= true>
       <div class="card" ng-repeat="schedule in schedules">
-          <div class="item item-divider" style="background-color:#add8e6">
-              <div style="font-size:20px">{{schedule.label}}</div>
+          <div class="item item-divider" style="background-color:{{schedule.classId}}">
+              <div style="font-size:20px; display:inline">
+				{{schedule.label}}
+			  </div>
           </div>
           <div class="item item-text-wrap">
               <p/>
-              <strong>Time: &nbsp; {{schedule.time}}</strong>
+              <strong>Time: &nbsp; {{schedule.time | date:"MMM d"}}</strong>
+			  <span style="float:right">
+				  {{schedule.note}}
+			  </span>
           </div>
       </div>
-   </ion-list>
-  </ion-content>
+   </ion-list>-->
+   
+	<ion-header-bar class="bar-positive">
+		<h1 class="title">Assignments</h1>
+		<div class="buttons">
+			<button class="button" ng-click="toggleShowReorder()">Reorder</button>
+		</div>
+	</ion-header-bar>
+	
+	<ion-content> <!--check class="padding"-->
+		<ion-list show-reorder="getReorder().show">
+			<!--<ion-item collection-repeat="item in schedules" ng-style="{'background-color':item.classId}">-->
+			
+			<!-- There are some issues with collection-repeat and reordering: Drag any item below the first into first item to see-->
+			<ion-item ng-repeat="item in schedules" ng-style="{'background-color':item.classId}">
+				{{item.label}}
+				<br />
+				<strong>Due: {{item.time | date: "MMM d"}}</strong>
+				
+				<span style="float:right; padding-right: {{getReorder().pad}}%">
+					{{item.note}}
+				</span>
+				<ion-reorder-button class="ion-navicon"
+					on-reorder="moveItem(item, $fromIndex, $toIndex)">
+				</ion-reorder-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+	
 </ion-view>
