@@ -1,22 +1,5 @@
-<!--Keep view-title="Schedule" and check enable-menu-with-back-views="false", ask why show-delete=true-->
+<!--check enable-menu-with-back-views="false", ask why show-delete=true-->
 <ion-view view-title="Schedule" hide-nav-bar="true" hide-back-button="true">
-   	<!--<ion-list show-delete= true>
-      <div class="card" ng-repeat="schedule in schedules">
-          <div class="item item-divider" style="background-color:{{schedule.classId}}">
-              <div style="font-size:20px; display:inline">
-				{{schedule.label}}
-			  </div>
-          </div>
-          <div class="item item-text-wrap">
-              <p/>
-              <strong>Time: &nbsp; {{schedule.time | date:"MMM d"}}</strong>
-			  <span style="float:right">
-				  {{schedule.note}}
-			  </span>
-          </div>
-      </div>
-   </ion-list>-->
-   
 	<ion-header-bar class="bar-positive">
 		<h1 class="title">Assignments</h1>
 		<div class="buttons">
@@ -26,16 +9,16 @@
 	
 	<ion-content> <!--check class="padding"-->
 		<ion-list show-reorder="getReorder().show">
-			<!--<ion-item collection-repeat="item in schedules" ng-style="{'background-color':item.classId}">-->
-			
 			<!-- There are some issues with collection-repeat and reordering: Drag any item below the first into first item to see-->
+			<!--<ion-item collection-repeat="item in schedules" ng-style="{'background-color':item.classId}">-->
 			<ion-item ng-repeat="item in schedules" ng-style="{'background-color':item.classId}">
 				{{item.label}}
 				<br />
 				<strong>Due: {{item.time | date: "MMM d"}}</strong>
 				
-				<span style="float:right; padding-right: {{getReorder().pad}}%">
-					{{item.note}}
+				<!--need to update all styles into css file to make this easier to manage-->
+				<span style="float:right; padding-right: {{getReorder().pad}}%; width:50%; overflow: hidden; text-overflow: ellipsis; white-space:nowrap">
+					{{item.note}} <!--look how to popup text input or similar-->
 				</span>
 				<ion-reorder-button class="ion-navicon"
 					on-reorder="moveItem(item, $fromIndex, $toIndex)">

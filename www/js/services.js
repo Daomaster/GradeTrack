@@ -72,7 +72,7 @@ angular.module('services', [])
 	toggleShowReorder: function() {
 		showReorderBtn = !showReorderBtn;
 		if (showReorderBtn) {
-			paddingFromRight = 9;
+			paddingFromRight = 10;
 		} else {
 			paddingFromRight = 0;
 		}
