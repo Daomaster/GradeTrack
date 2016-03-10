@@ -9,10 +9,6 @@ angular.module('controllers', [])
 	$scope.moveItem = function(item, fromIndex, toIndex) {
 		ScheduleService.moveItem(item, fromIndex, toIndex);
   };
-  
-	$scope.toggleShowReorder = function() {
-		ScheduleService.toggleShowReorder();
-	}
 	
 	$scope.getReorder = function() {
 		return ScheduleService.getReorder();
@@ -32,12 +28,15 @@ angular.module('controllers', [])
 
 })
 
-.controller('ListCtrl', function($scope,$state) {
+.controller('ListCtrl', function($scope,$state, ScheduleService) {
 
   $scope.account = function(){ $state.go('lists.account');};
   $scope.grade = function(){$state.go('lists.grade');};
   $scope.schedule = function(){$state.go('lists.schedule');};
-
+  
+  $scope.toggleShowReorder = function() {
+		ScheduleService.toggleShowReorder();
+	}
 })
 
 
