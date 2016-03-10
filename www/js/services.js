@@ -3,6 +3,7 @@ angular.module('services', [])
 .factory('ScheduleService', function() {
   // Might use a resource here that returns a JSON array
   var showReorderBtn = false;
+  var toggleVisibility = true;
   var paddingFromRight = 0;
   
   // Some fake testing data
@@ -69,6 +70,12 @@ angular.module('services', [])
 		schedules.splice(fromIndex, 1);
 		schedules.splice(toIndex, 0, item);
 	},
+	showToggle: function(show) {
+		toggleVisibility = show;
+	},
+	isToggleShown: function () {
+		return toggleVisibility;
+	},
 	toggleShowReorder: function() {
 		showReorderBtn = !showReorderBtn;
 		if (showReorderBtn) {
@@ -76,6 +83,9 @@ angular.module('services', [])
 		} else {
 			paddingFromRight = 0;
 		}
+	},
+	showReorder: function(show) {
+		showReorderBtn = show;
 	},
 	getReorder: function() {
 		return {show: showReorderBtn, pad: paddingFromRight};
