@@ -79,7 +79,7 @@ angular.module('services', [])
 	toggleShowReorder: function() {
 		showReorderBtn = !showReorderBtn;
 		if (showReorderBtn) {
-			paddingFromRight = 10;
+			paddingFromRight = 11;
 		} else {
 			paddingFromRight = 0;
 		}
@@ -89,6 +89,12 @@ angular.module('services', [])
 	},
 	getReorder: function() {
 		return {show: showReorderBtn, pad: paddingFromRight};
+	},
+	asn: function(index) {
+		return schedules[index];
+	},
+	setNote: function(index, res) {
+		schedules[index].note = res;
 	}
   };
 })

@@ -1,6 +1,8 @@
 angular.module('controllers', [])
 
-.controller('ScheduleCtrl', function($scope, ScheduleService) {
+// Adding in $ionicPopup service to show when user
+// clicks on note.
+.controller('ScheduleCtrl', function($scope, $ionicPopup, ScheduleService) {
     $scope.schedules = ScheduleService.all();
     $scope.remove = function(scheduleId) {
 		ScheduleService.remove(scheduleId);
@@ -12,7 +14,22 @@ angular.module('controllers', [])
 	
 	$scope.getReorder = function() {
 		return ScheduleService.getReorder();
-	}
+	};
+	
+	$scope.showPrompt = function (index) {
+		var promptPopup = $ionicPopup.prompt({
+			title: ScheduleService.asn(index).label,
+			template: "Edit Note",
+			inputType: 'text',
+			defaultText: ScheduleService.asn(index).note
+		});
+		
+		promptPopup.then(function(res) {
+			if (res) {
+				ScheduleService.setNote(index, res);
+			}
+		});
+	};
 })
 
 .controller('GradeCtrl', function($scope, $window, GradeService) {

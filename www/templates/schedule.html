@@ -6,7 +6,7 @@
 				<br />
 				<strong>Due: {{item.time | date: "MMM d"}}</strong>
 				
-				<span style="float:right; padding-right: {{getReorder().pad}}%; width:50%; overflow: hidden; text-overflow: ellipsis; white-space:nowrap">
+				<span ng-click="showPrompt($index)" style="float:right; padding-right: {{getReorder().pad}}%; width:50%; overflow: hidden; text-overflow: ellipsis; white-space:nowrap">
 					{{item.note}}
 				</span>
 				<ion-reorder-button class="ion-navicon"
