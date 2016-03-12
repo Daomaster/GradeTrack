@@ -45,6 +45,12 @@ angular.module('controllers', [])
 
 })
 
+.controller('LoginCtrl', function($scope, $state) {
+	//Google sign-in app client ID; to be changed later-
+	//<meta name="google-signin-client_id" content="594239171203-tcdoejs2kooe6iej74kk2j6es33l3psu.apps.googleusercontent.com">
+	
+})
+
 .controller('ListCtrl', function($scope,$state, ScheduleService) {
 	// Need to use $scope.$on() to listen for events fired by state transitions
 	// http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$state

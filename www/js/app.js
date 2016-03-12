@@ -30,6 +30,13 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'chart.js'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
+  
+  // login state
+	.state('login', {
+		url: '/login',
+		templateUrl: 'templates/login.html',
+		controller: 'LoginCtrl'
+	})
 
   // setup an abstract state for the tabs directive
     .state('lists', {
@@ -72,6 +79,6 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'chart.js'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/lists/schedule');
-
+  $urlRouterProvider.otherwise('/login');
+	// Not sure if we want to use $urlRouterProvider.when() instead for default
 });
