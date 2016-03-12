@@ -1,0 +1,66 @@
+<ion-view view-title="Dashboard" enable-menu-with-back-views="false">
+  <ion-content>
+    <ion-list>
+		<div ng-repeat="group in groups">
+      <ion-item class="item-stable"
+				ng-click ="toggleGroup(group)"
+				ng-class="{active: isGroupShow(group)}" >
+			<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+			<span class="className">{{ group.name }}</span>
+			<span class="classGrade">{{classLetterGrade(group)}}</span>
+		</ion-item>
+		<ion-item class ="item-accordion"
+			ng-show="isGroupShown(group)">
+			<ul class="dbNextAssignment">
+				<li>
+					<span class="listTitle">Next Assignment Due</span>
+					<span class="listValue">{{getEarliestDue(group).name}}</span>
+				</li>
+				<li>
+					<span class="listValue">{{getEarliestDue(group).dueDate | date}}</span>
+				</li>
+			</ul>
+		</ion-item>
+
+      {{test}}
+      {{test2}}
+      {{test3}}
+      {{test4}}
+      {{test5}}
+		<ion-item class ="item-accordion"
+			ng-show="isGroupShown(group)">
+			<span class="listTitle">Assignments Completed</span>
+			<span  class="listValue">{{getCompletedAssignments(group)}}/{{getTotalAssignments(group)}}
+				  ({{getCompletedAssignments(group) / getTotalAssignments(group) *100 | number:0}}%}</span>
+		</ion-item>
+
+      <div ng-repeat="type in group.weights">
+		<ion-item class ="item-accordion"
+			ng-show="isGroupShown(group)">
+			<ul class="dbPoints">
+        <li>
+          <span class="listTitle">Category: {{ type.type }} ({{ type.weight}}% of total)</span>
+        </li>
+				<li>
+					<span class="listSubTitle">Points Earned</span>
+					<span class="listValue">{{getCategoryPoints(group, type.type)}}</span>
+				</li>
+				<li>
+					<span class="listSubTitle">Points Total</span>
+					<span class="listValue">{{getCategoryTotalPoints(group, type.type)}}</span>
+				</li>
+				<li>
+					<span class="listSubTitle">Category Grade</span>
+					<span class="listValue">{{ getCategoryGrade(group, type.type) |number:0}}% </span>
+				</li>
+			</ul>
+		</ion-item></div>
+		<ion-item class ="item-accordion"
+			ng-show="isGroupShown(group)">
+				<span class="listTitle"> Overall Grade </span>
+				<span class="listValue">{{classPercent(group)}}%</span>
+		</ion-item>
+	  </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
