@@ -1,1 +1,16 @@
 /* Empty. Add your own CSS if you like */
+.hidden {
+  display: none;
+}
+#overlay {
+  background-color: #98AFC7;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 100000;
+}
+
+#overlay h1{
+  text-align: center;
+  margin-top: 50px;
+}
