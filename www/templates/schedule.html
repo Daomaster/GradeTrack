@@ -1,0 +1,19 @@
+<ion-view view-title="Schedule" enable-menu-with-back-views="false">
+	<ion-content class="padding">
+		<ion-list show-reorder="getReorder().show">
+			<ion-item ng-repeat="item in schedules" ng-style="{'background-color':item.classId}">
+				{{item.name}} ({{item.parent.name}})
+				<br />
+				<strong>Due: {{item.dueDate | date: "MMM d"}}</strong>
+
+				<span ng-click="showPrompt($index)" style="float:right; padding-right: {{getReorder().pad}}%; width:50%; overflow: hidden; text-overflow: ellipsis; white-space:nowrap">
+					{{item.note}}
+				</span>
+				<ion-reorder-button class="ion-navicon"
+					on-reorder="moveItem(item, $fromIndex, $toIndex)">
+				</ion-reorder-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+
+</ion-view>

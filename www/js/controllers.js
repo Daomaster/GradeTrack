@@ -1,20 +1,149 @@
 angular.module('controllers', [])
 
+// Adding in $ionicPopup service to show when user
+// clicks on note.
+.controller('ScheduleCtrl', function($scope, $ionicPopup, ScheduleService, RealGradeService) {
+    $scope.schedules = RealGradeService.getAssignmentArray();
+    $scope.remove = function(scheduleId) {
+      RealGradeService.remove(scheduleId);
+	};
 
-.controller('ScheduleCtrl', function($scope, ClassScheduleService) {
+	$scope.moveItem = function(item, fromIndex, toIndex) {
+    RealGradeService.moveItem(item, fromIndex, toIndex);
+  };
 
-    $scope.schedules = ClassScheduleService.overallAssignmentList();
-   
+	$scope.getReorder = function() {
+		return RealGradeService.getReorder();
+	};
+
+	$scope.showPrompt = function (index) {
+		var promptPopup = $ionicPopup.prompt({
+			title: RealGradeService.asn(index).label,
+			template: "Edit Note",
+			inputType: 'text',
+			defaultText: RealGradeService.asn(index).note
+		});
+
+		promptPopup.then(function(res) {
+			if (res) {
+        RealGradeService.setNote(index, res);
+			}
+		});
+	};
 })
 
-.controller('GradeCtrl', function($scope, ClassScheduleService) {
+.controller('GradeCtrl', function($scope, $window, GradeService, RealGradeService) {
 
-  $scope.labels = ClassScheduleService.getCompletedLabelArray(0);
-  $scope.series = ['Average', 'Yours'];
-  $scope.grades = ClassScheduleService.getCompiledGradeArray(0);
-  $scope.yours = ClassScheduleService.getCompletedGradeArray(0);
+  $scope.labels = RealGradeService.getLabelArray();
+  $scope.series = RealGradeService.seriesArray();
+  $scope.grades = RealGradeService.compiledGradeArray();
+  $scope.yours = RealGradeService.getMyGradeArray();
+  $scope.width = $window.innerWidth;
+  console.log($scope.width);
+  $scope.height = $window.innerHeight;
+  console.log($scope.height);
 
 })
+
+.controller('ListCtrl', function($scope,$state, ScheduleService, RealGradeService) {
+
+
+  // populate grades with random data (list it loaded first, so all menus load)
+
+  this.randomInt = function(min,max)
+  {
+    return Math.floor((Math.random() * (max-min)) + min);
+  };
+  var weights = [
+    {type: "quiz",      weight: 20},
+    {type: "homework",  weight: 20},
+    {type: "midterm",   weight: 20},
+    {type: "final",     weight: 40}
+  ];
+  for (var j = 0; j < 3; ++j)
+  {
+    var classGrade = this.randomInt(0, 100);//;
+    var classAve =   this.randomInt(0, 100);
+    var c = RealGradeService.addClass("CS" + (450+j), weights, classGrade, classAve);
+    for (var i = 0; i < 5; ++i)
+    {
+      var due = new Date(2016, this.randomInt(0,5),this.randomInt(1,30));
+      var points = this.randomInt(0, 300);
+      var total = this.randomInt(0, 300) + points;
+      var grade = this.randomInt(0, 100);
+      var ave = this.randomInt(0, 100);
+      var weight = weights[this.randomInt(0,4)].type;
+      var a = c.addAssignment("Assignment"+i, due, grade, ave, points, total, weight);
+      a.classId = '#'+Math.floor(Math.random()*16777215).toString(16);
+    }
+  }
+  RealGradeService.populateAssignmentArray();
+
+
+	// Need to use $scope.$on() to listen for events fired by state transitions
+	// http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$state
+	$scope.$on('$stateChangeStart',
+	function(event, toState, toParams, fromState, fromParams) {
+		if (toState.name === 'lists.schedule') {
+      RealGradeService.showToggle(true);
+		} else {
+      RealGradeService.showToggle(false);
+      RealGradeService.showReorder(false); // Optional: Reset drag on exit
+		}
+	});
+
+	// In these views, Reorder should be hidden
+	/*$scope.account = function() {
+		ScheduleService.showToggle(false);
+		$state.go('lists.account');
+	};
+	$scope.grade = function() {
+		ScheduleService.showToggle(false);
+		$state.go('lists.grade');
+	};
+
+	// Going to Schedule view, so show Reorder button
+	$scope.schedule = function(){
+	  ScheduleService.showToggle(true);
+
+	  $state.go('lists.schedule');
+	};*/
+
+	// This is when user clicks Reorder toggle/button
+  $scope.toggleShowReorder = function() {
+    RealGradeService.toggleShowReorder();
+	}
+
+	// This is for HTML button to know if it should be shown or not
+	$scope.isToggleShown = function() {
+		return RealGradeService.isToggleShown();
+	}
+})
+
+  .controller('DashboardCtrl', function($scope, RealGradeService, ScheduleService) {
+
+
+    $scope.test = RealGradeService.getAssignmentArray();
+
+
+    $scope.groups = RealGradeService.getClasses();
+
+    //gettors
+    $scope.classLetterGrade = 		    function(_class) 	          { return RealGradeService.classLetterGrade(_class); 	              };
+    $scope.classPercent = 			      function(_class) 	          { return RealGradeService.classGrade(_class); 							      	};
+    $scope.getCategoryTotalPoints =   function(_class, category) 	{ return RealGradeService.getCategoryTotalPoints(_class, category); };
+    $scope.getCategoryPoints = 		    function(_class, category) 	{ return RealGradeService.getCategoryPoints(_class, category); 			};
+    $scope.getEarliestDue = 		      function(_class) 	          { return RealGradeService.earliestAssignmentDue(_class);	          };
+    $scope.getCategoryGrade =         function(_class, category)  { return RealGradeService.getCategoryGrade(_class, category)        };
+    $scope.getCompletedAssignments =  function(_class) 	          { return RealGradeService.getCompletedAssignments(_class); 	        };
+    $scope.getTotalAssignments = 	    function(_class)	          { return RealGradeService.getTotalAssignments(_class);				      };
+
+    // group collapsing
+    $scope.toggleGroup =  function(group) 				{ group.show = !group.show; 													};
+    $scope.isGroupShown = function(group) 				{ return group.show; 																	};
+
+  })
+
 
 .controller('PolarAreaCtrl', function ($scope, GradeService) {
   $scope.labels = GradeService.getObjects('labels');
@@ -25,48 +154,4 @@ angular.module('controllers', [])
   $scope.settings = {
     enableFriends: true
   };
-})
-
-
-
-
-
-
-
-
-.controller('DashboardCtrl', function($scope, ClassScheduleService) {
-	
-	//populate class array randomly for now 
-	$scope.randomInt = function(min,max)
-	{
-		return Math.floor((Math.random() * (max-min)) + min)
-	}
-	for (var j = 0; j < 10; ++j)
-	{
-		var c = ClassScheduleService.addClass("CS" + (450+j));
-		for (var i = 0; i < 20; ++i)
-		{
-			var due = new Date(2016, $scope.randomInt(0,5),$scope.randomInt(1,30));
-			var score = $scope.randomInt(0, 300);
-			var weight = $scope.randomInt(0, 300) + score;
-			var ave = $scope.randomInt(0, weight);
-			c.addAssignment("Assignment"+i, due, score, weight, ave)
-		}
-	}
-	$scope.groups = ClassScheduleService.getClasses();
-	
-	//gettors
-	$scope.classLetterGrade = 		 function(_class) 	{ return ClassScheduleService.letterGrade(ClassScheduleService.totalPercent(_class)); 	};
-	$scope.classPercent = 			 function(_class) 	{ return ClassScheduleService.totalPercent(_class); 									};
-	$scope.getTotalPoints = 		 function(_class) 	{ return ClassScheduleService.overallWeight(_class); 									};
-	$scope.getEarnedPoints = 		 function(_class) 	{ return ClassScheduleService.totalScore(_class);										};
-	$scope.getEarliestDue = 		 function(_class) 	{ return ClassScheduleService.earliestAssignmentDue(_class); 							};
-	$scope.getCompletedAssignments = function(_class) 	{ return ClassScheduleService.completedAssignments(_class); 							};
-	$scope.getPossiblePoints = 		 function(_class)	{ return ClassScheduleService.totalWeight(_class);			 							};
-	$scope.getTotalAssignments = 	 function(_class)	{ return ClassScheduleService.totalAssignments(_class);									};
-	
-	// group collapsing
-	$scope.toggleGroup =  function(group) 				{ group.show = !group.show; 															};
-	$scope.isGroupShown = function(group) 				{ return group.show; 																	};
-	
 });
