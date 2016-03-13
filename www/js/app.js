@@ -32,46 +32,45 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'chart.js'])
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('lists', {
-    url: '/lists',
+    .state('tab', {
+    url: '/tab',
     abstract: true,
-    templateUrl: 'templates/lists.html',
-    controller: 'ListCtrl'
+    templateUrl: 'templates/tabs.html'
   })
 
   // Each tab has its own nav history stack:
 
-  .state('lists.schedule', {
+  .state('tab.schedule', {
     url: '/schedule',
     views: {
-      'menuContent': {
-        templateUrl: 'templates/schedule.html',
+      'tab-schedule': {
+        templateUrl: 'templates/tab-schedule.html',
         controller: 'ScheduleCtrl'
       }
     }
   })
 
-  .state('lists.grade', {
+  .state('tab.grade', {
       url: '/grade',
       views: {
-        'menuContent': {
-          templateUrl: 'templates/grade.html',
+        'tab-grade': {
+          templateUrl: 'templates/tab-grade.html',
           controller: 'GradeCtrl'
         }
       }
     })
 
-  .state('lists.account', {
+  .state('tab.account', {
     url: '/account',
     views: {
-      'menuContent': {
-        templateUrl: 'templates/account.html',
+      'tab-account': {
+        templateUrl: 'templates/tab-account.html',
         controller: 'AccountCtrl'
       }
     }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/lists/schedule');
+  $urlRouterProvider.otherwise('/tab/schedule');
 
 });

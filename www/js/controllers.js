@@ -7,27 +7,14 @@ angular.module('controllers', [])
   };
 })
 
-.controller('GradeCtrl', function($scope, $window, GradeService) {
+.controller('GradeCtrl', function($scope, GradeService) {
 
   $scope.labels = GradeService.getObjects('labels');
   $scope.series = GradeService.getObjects('series');
   $scope.grades = GradeService.getObjects('grades');
   $scope.yours = GradeService.getObjects('yours');
-  $scope.width = $window.innerWidth;
-  console.log($scope.width);
-  $scope.height = $window.innerHeight;
-  console.log($scope.height);
 
 })
-
-.controller('ListCtrl', function($scope,$state) {
-
-  $scope.account = function(){ $state.go('lists.account');};
-  $scope.grade = function(){$state.go('lists.grade');};
-  $scope.schedule = function(){$state.go('lists.schedule');};
-
-})
-
 
 .controller('PolarAreaCtrl', function ($scope, GradeService) {
   $scope.labels = GradeService.getObjects('labels');
