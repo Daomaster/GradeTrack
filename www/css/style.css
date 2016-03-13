@@ -2,8 +2,13 @@
 .hidden {
   display: none;
 }
+
 #overlay {
-  background-color: #98AFC7;
+  background-color: #008C9E;
+  /*
+  background-image: url("Library.jpg");
+  background-size: cover;
+  */
   height: 100%;
   width: 100%;
   position: absolute;
@@ -11,6 +16,16 @@
 }
 
 #overlay h1{
+  /*background-color:;*/
   text-align: center;
   margin-top: 50px;
+}
+
+
+#overlay button{
+  position: absolute;
+  display:block
+  margin:0 auto;
+  text-align: center;
+  bottom:10%;
 }
