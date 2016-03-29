@@ -4,7 +4,7 @@ Grade Tracker
 Project which is for UNLV CS 472, the purpose to build a easier tool to help students and instructors to keep track of their grades.
 
 ## Team Member:
-Daoyun Zeng, Iting Wen, Fritz Ammon, Brandon Stenen, Jonathan Fonseca
+Daoyun Zeng, Iting Wen, Fritz Ammon, Brandon Stenen, Jonathan Fonseca, pw Michael Harris
 
 
 ## Project Set Up
