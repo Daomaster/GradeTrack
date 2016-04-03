@@ -18,6 +18,7 @@ class Course():
         self.students = []
         self.assignments = {}
         self.weights = []
+        self.average = None
 
     def add( self, item ):
         if isinstance( item, _instructor.Instructor ):
@@ -66,7 +67,8 @@ class Course():
             "instructor" : instructor,
             "students" : students,
             "assignments" : assignments,
-            "weights" : weights
+            "weights" : weights,
+            "average" : self.average
         }
 
     def json( self, indent = None, sort_keys = False ):

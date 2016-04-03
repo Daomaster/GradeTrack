@@ -7,7 +7,16 @@ if __name__ == "__main__":
     import json
     import sys
     
-    if len( sys.argv ) == 2 and sys.argv[ 1 ] == "-d":
+    if len( sys.argv ) == 2 and sys.argv[ 1 ] == "-t":
+        ipeds = "182281"
+        name = "University of Nevada, Las Vegas"
+        courseCount = 3
+        studentCount = 3
+        instructorCount = 3
+        classMin = 1
+        classMax = 3
+        ofile = open( "unlv.json", "w" )
+    elif len( sys.argv ) == 2 and sys.argv[ 1 ] == "-d":
         ipeds = "182281"
         name = "University of Nevada, Las Vegas"
         courseCount = 100
@@ -142,10 +151,39 @@ if __name__ == "__main__":
             for inner in xrange( assignmentCount ):
                 assignment = rand.Assignment( _type = weights[ index ] )
                 course.add( assignment )
-                if random.random() < .5:
+                if random.random() < .75:
                     for student in course.students:
                         student.add( ( course, rand.Grade( assignment = assignment ) ) )
 
+    # Gets the course
+    for course in school.courses:
+        course = school.courses[ course ]
+        courseAverage = 0
+        courseTotal = 0
+        # Gets the assignment
+        for assignment in course.assignments:
+            assignment = course.assignments[ assignment ]
+            # Gets the students grades
+            average = 0
+            graded = False
+            for student in course.students:
+                if course.id in student.grades and assignment.id in student.grades[ course.id ]:
+                    average += student.grades[ course.id ][ assignment.id ].grade
+                    graded = True
+
+            # Gets the assignment total
+            if graded:
+                average /= len( course.students )
+                assignment.average = average
+
+                # Adds it weighted to the course average
+                courseAverage += average
+                courseTotal += assignment.total
+
+        if courseTotal > 0:
+            course.average = 100 * courseAverage / courseTotal
+
     ofile.write( school.json( indent = 2 ) )
     ofile.close()
-#    print "{", "\"" + school.ipeds + "\"", ":", school.json( indent = 2 ), "}"
+
+

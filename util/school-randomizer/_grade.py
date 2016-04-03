@@ -25,7 +25,7 @@ class Grade():
         return json.dumps( self.dict(), indent = indent, sort_keys = sort_keys )
         
     def __str__( self ):
-        temp = "id: " + str( self.assignment.id ) + " grade " + str( self.grade )
+        temp = "id: " + str( self.assignment.id ) + ", grade: " + str( self.grade )
 
         return temp
 

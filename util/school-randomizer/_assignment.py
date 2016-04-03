@@ -30,6 +30,8 @@ class Assignment():
         else:
             raise Exception( "Assignment due date is expected to be either None or datetime.datetime, but recieved variable of type \'" + _due.__class__.__name__ + "\'." )
 
+        self.average = None
+
 
     def dict( self ):
         return {
@@ -52,7 +54,8 @@ class Assignment():
                 "hour" : self.due.hour,
                 "minute" : self.due.minute,
                 "second" : self.due.second
-            }
+            },
+            "average" : self.average
         }
 
     def json( self, indent = None, sort_keys = False ):
@@ -66,6 +69,7 @@ class Assignment():
         temp += format % ( "type:", self.type )
         temp += format % ( "assigned:", self.assigned )
         temp += format % ( "due:", self.due )
+        temp += format % ( "average:", self.due )
 
         return temp[ : -1]
 
