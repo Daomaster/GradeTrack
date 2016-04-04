@@ -15,7 +15,7 @@ if __name__ == "__main__":
         instructorCount = 3
         classMin = 1
         classMax = 3
-        ofile = open( "unlv.json", "w" )
+        ofile = open( "test.json", "w" )
     elif len( sys.argv ) == 2 and sys.argv[ 1 ] == "-d":
         ipeds = "182281"
         name = "University of Nevada, Las Vegas"

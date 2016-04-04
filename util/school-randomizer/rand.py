@@ -111,7 +111,9 @@ def Grade( assignment = None, grade = None ):
     assignment = noneSingleGroup( assignment, Assignment(), _assignment.Assignment )
 
     if grade is None:
-        grade = random.randint( 0, assignment.total )
+        mu = 80
+        sigma = 10
+        grade = int( min( 100, max( 0, random.normalvariate( mu, sigma ) ) ) * assignment.total / 100.0 )
 
     return _grade.Grade( assignment = assignment, grade = grade )
 

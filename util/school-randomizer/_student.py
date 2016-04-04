@@ -23,30 +23,32 @@ class Student():
             raise Exception( "This shouldn\'t happen!" )
 
     def dict( self ):
+        # a dictionary of courses
         courses = {}
         for _id in self.courses:
+            # Get the semester
             semester = self.courses[ _id ].term + "-" + self.courses[ _id ].year
             if not semester in courses:
                 courses[ semester ] = []
-            courses[ semester ].append( { "id" : self.courses[ _id ].id, "title" : self.courses[ _id ].title } )
 
-        grades = {}
-        for _id in self.grades:
-            semester = "-".join( _id.split( "-" )[ 3 : ] )
-            if not semester in grades:
-                grades[ semester ] = {}
-            if not _id in grades[ semester ]:
-                grades[ semester ][ _id ] = {}
-            for assignment in self.grades[ _id ]:
-                grades[ semester ][ _id ][ self.grades[ _id ][ assignment ].assignment.id ] = self.grades[ _id ][ assignment ].grade
+            # Create the course
+            course = {}
+            course[ "id" ] = self.courses[ _id ].id
+            course[ "title" ] = self.courses[ _id ].title
+            course[ "grades" ] = {}
+
+            for grade in self.grades[ _id ]:
+                course[ "grades" ][ grade ] = self.grades[ _id ][ grade ].grade
+
+            courses[ semester ].append( course )
 
         return {
             "id" : self.id,
             "first" : self.first,
             "last" : self.last,
-            "courses" : courses,
-            "grades" : grades
+            "courses" : courses
         }
+
     def json( self, indent = None, sort_keys = False ):
         return json.dumps( self.dict(), indent = indent, sort_keys = sort_keys )
 
