@@ -9,11 +9,11 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>
-	  
+
 	  <ion-nav-buttons side="right">
         <button class="button" style="border: 1px solid; border-radius: 100px" ng-show="isToggleShown()" ng-click="toggleShowReorder()"><b>Reorder</b></button>
       </ion-nav-buttons>
-	 
+
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
@@ -24,6 +24,9 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
+        <ion-item menu-close href="#/lists/login">
+          Login
+        </ion-item>
         <ion-item menu-close href="#/lists/dashboard">
           Dashboard
         </ion-item>
@@ -33,6 +36,7 @@
         <ion-item menu-close href="#/lists/schedule">
           Schedule
         </ion-item>
+
       </ion-list>
     </ion-content>
   </ion-side-menu>

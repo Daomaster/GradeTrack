@@ -61,7 +61,7 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'chart.js'])
     }
   })
 
-  .state('lists.grade', {
+    .state('lists.grade', {
       url: '/grade',
       views: {
         'menuContent': {
@@ -70,16 +70,15 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'chart.js'])
         }
       }
     })
-
-  .state('lists.account', {
-    url: '/account',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/account.html',
-        controller: 'AccountCtrl'
+    .state('lists.login', {
+      url: '/login',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/login.html',
+          controller: 'LoginCtrl'
+        }
       }
-    }
-  });
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/lists/schedule');

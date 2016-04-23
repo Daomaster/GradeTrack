@@ -6,6 +6,10 @@ angular.module('services', [])
   var toggleVisibility = true;
   var paddingFromRight = 0;
 
+  var username;
+  var password;
+  var loggedIn = false;
+
   // Some fake testing data
   var schedules = [
     {
