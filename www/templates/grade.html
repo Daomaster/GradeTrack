@@ -1,6 +1,10 @@
 <ion-view view-title="Grade" enable-menu-with-back-views="false">
   <ion-content>
-
+    <ion-list>
+      <ion-item style="text-align:center;" ng-repeat="course in courses" href="/#/lists/graph">
+        {{course.name}}
+      </ion-item>
+    </ion-list>
     <div ng-style="{ 'height' : height/3+'px'}">
       lol
     </div>

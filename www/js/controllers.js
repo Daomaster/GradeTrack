@@ -33,12 +33,18 @@ angular.module('controllers', [])
 	};
 })
 
-.controller('LoginCtrl', function($scope, $window, RealGradeService)
-{
-  
-})
+  .controller('LoginCtrl', function($scope, $window, RealGradeService)
+  {
+
+  })
+  .controller('GraphCtrl', function($scope, $window, RealGradeService)
+  {
+
+  })
 
 .controller('GradeCtrl', function($scope, $window, GradeService, RealGradeService) {
+
+  $scope.courses =RealGradeService.getClasses();
 
   $scope.labels = RealGradeService.getLabelArray();
   $scope.series = RealGradeService.seriesArray();

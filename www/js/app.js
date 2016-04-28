@@ -61,6 +61,15 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'chart.js'])
     }
   })
 
+    .state('lists.graph', {
+      url: '/graph',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/graph.html',
+          controller: 'GraphCtrl'
+        }
+      }
+    })
     .state('lists.grade', {
       url: '/grade',
       views: {
