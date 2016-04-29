@@ -5,6 +5,19 @@ angular.module('controllers', [])
 
 .controller('ScheduleCtrl', function($scope, $ionicPopup, ScheduleService, RealGradeService) {
     $scope.schedules = RealGradeService.getAssignmentArray();
+
+  $scope.colors =
+    [
+      "#668B8B",
+      "#C1CDCD",
+      "#F0FFFF",
+      "#A4D3EE"
+    ];
+  $scope.getColor = function(index)
+  {
+    return colors[index % colors.length];
+  };
+
     $scope.remove = function(scheduleId) {
       RealGradeService.remove(scheduleId);
 	};
@@ -46,7 +59,7 @@ angular.module('controllers', [])
     $scope.yours = RealGradeService.getMyGradeArray();
   })
 
-.controller('GradeCtrl', function($scope, $window, GradeService, RealGradeService) {
+.controller('GradeCtrl', function($scope, $window, RealGradeService) {
 
   $scope.courses =RealGradeService.getClasses();
 
@@ -124,12 +137,12 @@ angular.module('controllers', [])
 	// This is when user clicks Reorder toggle/button
   $scope.toggleShowReorder = function() {
     RealGradeService.toggleShowReorder();
-	}
+	};
 
 	// This is for HTML button to know if it should be shown or not
 	$scope.isToggleShown = function() {
 		return RealGradeService.isToggleShown();
-	}
+	};
 })
 
   .controller('DashboardCtrl', function($scope, RealGradeService, ScheduleService) {
@@ -154,16 +167,4 @@ angular.module('controllers', [])
     $scope.toggleGroup =  function(group) 				{ group.show = !group.show; 													};
     $scope.isGroupShown = function(group) 				{ return group.show; 																	};
 
-  })
-
-
-.controller('PolarAreaCtrl', function ($scope, GradeService) {
-  $scope.labels = GradeService.getObjects('labels');
-  $scope.yours = GradeService.getObjects('yours');
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+  });

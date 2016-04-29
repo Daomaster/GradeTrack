@@ -1,7 +1,7 @@
 <ion-view view-title="Schedule" enable-menu-with-back-views="false">
 	<ion-content class="padding">
 		<ion-list show-reorder="getReorder().show">
-			<ion-item ng-repeat="item in schedules" ng-style="{'background-color':item.classId}">
+			<ion-item ng-repeat="item in schedules" ng-style="{'background-color':'{{colors[$index % colors.length]}}'}">
 				{{item.name}} ({{item.parent.name}})
 				<br />
 				<strong>Due: {{item.dueDate | date: "MMM d"}}</strong>
@@ -15,5 +15,5 @@
 			</ion-item>
 		</ion-list>
 	</ion-content>
-	
+
 </ion-view>
