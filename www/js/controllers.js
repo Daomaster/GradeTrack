@@ -48,7 +48,9 @@ angular.module('controllers', [])
 
   .controller('LoginCtrl', function($scope, $window, RealGradeService)
   {
-
+    $scope.username = "";
+    $scope.password = "";
+    //$$placeholder -- login, retrieve data
   })
   .controller('GraphCtrl', function($scope, $window, RealGradeService)
   {
