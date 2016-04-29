@@ -2,6 +2,7 @@ angular.module('services', [])
   .service('LoginService', function()
   {
     var loggedIn =false;
+    var username = "";
   })
 
 .service('ScheduleService', function() {

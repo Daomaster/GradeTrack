@@ -51,11 +51,30 @@ angular.module('controllers', [])
     $scope.username = "";
     $scope.password = "";
 
+    $scope.isLoggedIn = function()
+    {
+      return LoginService.loggedIn;
+    };
+    $scope.loggedInUser = function()
+    {
+      return LoginService.username;
+    };
+
+    $scope.logout = function()
+    {
+      //$$placeholder -- clear data?
+      this.username="";
+      this.password="";
+      LoginService.loggedIn = false;
+      LoginService.username = "";
+    };
+
     $scope.login = function()
     {
       //$$placeholder -- login, retrieve data
       LoginService.loggedIn=true;
-      console.log("attempted sign in");
+      LoginService.username = this.username;
+      console.log("attempted sign in as: " + this.username);
     };
 
   })
@@ -79,17 +98,8 @@ angular.module('controllers', [])
 
 })
 
-.controller('ListCtrl', function($scope,$state, ScheduleService, RealGradeService, LoginService) {
+.controller('ListCtrl', function($scope,$state, ScheduleService, RealGradeService) {
 
-  $scope.isLoggedIn = function()
-  {
-    return LoginService.loggedIn;
-  };
-  $scope.logout = function()
-  {
-    //$$placeholder -- clear data on logout?
-    LoginService.loggedIn = false;
-  };
 
   // populate grades with random data (list it loaded first, so all menus load)
 

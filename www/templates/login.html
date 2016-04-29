@@ -1,7 +1,16 @@
-<ion-view view-title="GradeTrack" enable-menu-with-back-views="false" >
+<ion-view view-title="Account" enable-menu-with-back-views="false" >
   <ion-content>
 
-    <div class="list">
+    <div ng-show="isLoggedIn()" class="list">
+      <ion-list>
+        <ion-item>
+          Logged in as: {{loggedInUser()}}
+      </ion-list>
+      <button class="button button-block button-assertive" ng-click="logout()">Log out</button>
+    </div>
+
+    <div ng-show="!isLoggedIn()">
+    <div class="list" >
       <label class="item item-input">
         <span class="input-label">Username</span>
         <input ng-model="username" type="text">
@@ -15,6 +24,7 @@
     <button class="button button-block button-positive" ng-click="login()" ng-href="#/lists/dashboard" >
       Log In
     </button>
+      </div>
 
   </ion-content>
 </ion-view>
