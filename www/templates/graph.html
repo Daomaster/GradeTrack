@@ -1,5 +1,20 @@
 <ion-view view-title="Graph" enable-menu-with-back-views="false">
   <ion-content>
-    k
+    <div style="width:50px;">
+      <canvas
+        id="line"
+        class="chart chart-line"
+        chart-data="grades"
+        chart-labels="labels"
+        chart-legend="true"
+        chart-series="series"
+        chart-click="onClick"
+        chart-options="{
+                 scaleShowGridLines : false,
+                 responsive: false
+              }">
+
+      </canvas>
+    </div>
   </ion-content>
 </ion-view>

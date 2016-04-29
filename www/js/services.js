@@ -101,7 +101,14 @@ angular.module('services', [])
   };
 })
 
+
   .service('RealGradeService', function() {
+
+    this.activeCourseID = 0;
+    this.getActiveCourse = function()
+    {
+      return classes[activeCourseID];
+    };
 
     var schedules = [];
     this.getAssignmentArray = function() { return schedules; };
@@ -243,7 +250,7 @@ angular.module('services', [])
     };
     this.getLabelArray = function(_class)
     {
-      _class = classes[0];
+      _class = classes[this.activeCourseID];
       var result = [];
       for (var i in _class.assignments)
       {
@@ -253,7 +260,7 @@ angular.module('services', [])
     };
     this.getMyGradeArray = function(_class)
     {
-      _class = classes[0];
+      _class = classes[this.activeCourseID];
       var result = [];
       for (var i in _class.assignments)
       {
@@ -263,7 +270,7 @@ angular.module('services', [])
     };
     this.getAverageArray = function(_class)
     {
-      _class = classes[0];
+      _class = classes[this.activeCourseID];
       var result = [];
       for (var i in _class.assignments)
       {

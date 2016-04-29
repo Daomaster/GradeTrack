@@ -39,21 +39,20 @@ angular.module('controllers', [])
   })
   .controller('GraphCtrl', function($scope, $window, RealGradeService)
   {
-
+    $scope.labels = RealGradeService.getLabelArray();
+    $scope.series = RealGradeService.seriesArray();
+    $scope.grades = RealGradeService.compiledGradeArray();
+    $scope.yours = RealGradeService.getMyGradeArray();
   })
 
 .controller('GradeCtrl', function($scope, $window, GradeService, RealGradeService) {
 
   $scope.courses =RealGradeService.getClasses();
 
-  $scope.labels = RealGradeService.getLabelArray();
-  $scope.series = RealGradeService.seriesArray();
-  $scope.grades = RealGradeService.compiledGradeArray();
-  $scope.yours = RealGradeService.getMyGradeArray();
-  $scope.width = $window.innerWidth;
-  console.log($scope.width);
-  $scope.height = $window.innerHeight;
-  console.log($scope.height);
+  $scope.SetActiveCourse = function(course)
+  {
+    RealGradeService.activeCourseID = course.id;
+  };
 
 })
 
