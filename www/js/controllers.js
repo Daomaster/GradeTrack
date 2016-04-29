@@ -39,6 +39,7 @@ angular.module('controllers', [])
   })
   .controller('GraphCtrl', function($scope, $window, RealGradeService)
   {
+    $scope.courseName = RealGradeService.getActiveCourse().name;
     $scope.labels = RealGradeService.getLabelArray();
     $scope.series = RealGradeService.seriesArray();
     $scope.grades = RealGradeService.compiledGradeArray();

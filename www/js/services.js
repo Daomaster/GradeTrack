@@ -107,7 +107,7 @@ angular.module('services', [])
     this.activeCourseID = 0;
     this.getActiveCourse = function()
     {
-      return classes[activeCourseID];
+      return classes[this.activeCourseID];
     };
 
     var schedules = [];
