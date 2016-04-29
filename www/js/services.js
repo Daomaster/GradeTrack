@@ -1,4 +1,8 @@
 angular.module('services', [])
+  .service('LoginService', function()
+  {
+    var loggedIn =false;
+  })
 
 .service('ScheduleService', function() {
   // Might use a resource here that returns a JSON array
@@ -6,9 +10,6 @@ angular.module('services', [])
   var toggleVisibility = true;
   var paddingFromRight = 0;
 
-  var username;
-  var password;
-  var loggedIn = false;
 
   // Some fake testing data
   var schedules = [
@@ -292,7 +293,7 @@ angular.module('services', [])
     // schedule functions -- probably a better way to do this in separate services, but this works for now
     //
     var showReorderBtn = false;
-    var toggleVisibility = true;
+    var toggleVisibility = false;
     var paddingFromRight = 0;
     this.remove = function(chat) {
       schedules.splice(schedules.indexOf(chat), 1);

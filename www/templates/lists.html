@@ -24,8 +24,11 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/lists/login">
+        <ion-item ng-show="!isLoggedIn()" menu-close href="#/lists/login">
           Login
+        </ion-item>
+        <ion-item ng-show="isLoggedIn()" menu-close ng-click="logout()" href="#/lists/login">
+          Logout
         </ion-item>
         <ion-item menu-close href="#/lists/dashboard">
           Dashboard

@@ -1,4 +1,4 @@
-<ion-view view-title="Grade" enable-menu-with-back-views="false">
+<ion-view view-title="GradeTrack" enable-menu-with-back-views="false" >
   <ion-content>
 
     <div class="list">
@@ -12,8 +12,8 @@
       </label>
     </div>
 
-    <button class="button button-block button-positive">
-      Log In  {{username}} {{password}}
+    <button class="button button-block button-positive" ng-click="login()" ng-href="#/lists/dashboard" >
+      Log In
     </button>
 
   </ion-content>
