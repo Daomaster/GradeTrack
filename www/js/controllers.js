@@ -6,6 +6,8 @@ angular.module('controllers', [])
 .controller('ScheduleCtrl', function($scope, $ionicPopup, ScheduleService, RealGradeService) {
     $scope.schedules = RealGradeService.getAssignmentArray();
 
+  $scope.dataSet = false;
+
   $scope.colors =
     [
       "#668B8B",
@@ -46,10 +48,10 @@ angular.module('controllers', [])
 	};
 })
 
-  .controller('LoginCtrl', function($scope, $window, RealGradeService, LoginService)
+  .controller('LoginCtrl', function($scope, $window, $http, RealGradeService, LoginService)
   {
     $scope.username = "";
-    $scope.password = "";
+    $scope.userpassword = "";
 
     $scope.isLoggedIn = function()
     {
@@ -63,26 +65,77 @@ angular.module('controllers', [])
     $scope.logout = function()
     {
       //$$placeholder -- clear data?
-      this.username="";
-      this.password="";
+      $scope.username="";
+      $scope.userpassword="";
       LoginService.loggedIn = false;
       LoginService.username = "";
     };
 
     $scope.login = function()
     {
-      //$$placeholder -- login, retrieve data
-      LoginService.loggedIn=true;
-      LoginService.username = this.username;
-      postLogin() // set defaults
+      var usr = this.username;
+      var pwd = this.userpassword;
 
+      if (usr == "" || pwd == "") return; // no input
 
-      console.log("attempted sign in as: " + this.username);
+      var loginInfo = {
+        username: usr,
+        password: pwd
+      };
+
+      console.log(loginInfo);
+
+      $http.post("http://localhost:3000/api/auth/signin", loginInfo).then(
+        function successCallback() {
+
+          $scope.postLogin(usr);
+
+        },
+
+        function errorCallback() {
+          //on Error
+          console.log("Invalid");
+
+        }
+      );
+
     };
 
-    $scope.postLogin = function() // set data after login
+    $scope.postLogin = function(usr) // set data after login
     {
+      var user = {
+        username: usr
+      };
+      $http.post("http://localhost:3000/api/info/user", user).then(
+        function successCallback(res) {
+            console.log(res);
 
+          if (!$scope.dataSet) // debounce
+          {
+            for (var i = 0; i < res.data.courses.length; ++i)
+            {
+              var title = res.data.courses[i].title;
+              var earned = res.data.courses[i].earned;
+              var c = RealGradeService.addClass(title, [], earned, earned);
+            }
+
+            $scope.dataSet = true;
+          }
+
+
+
+        },
+
+        function errorCallback() {
+          //on Error
+          console.log("Invalid");
+
+        }
+      );
+
+      //$$placeholder -- login, retrieve data
+      LoginService.loggedIn=true;
+      LoginService.username = $scope.username;
     };
 
   })
