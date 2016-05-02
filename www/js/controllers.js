@@ -74,7 +74,15 @@ angular.module('controllers', [])
       //$$placeholder -- login, retrieve data
       LoginService.loggedIn=true;
       LoginService.username = this.username;
+      postLogin() // set defaults
+
+
       console.log("attempted sign in as: " + this.username);
+    };
+
+    $scope.postLogin = function() // set data after login
+    {
+
     };
 
   })
