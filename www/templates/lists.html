@@ -27,13 +27,13 @@
         <ion-item menu-close href="#/lists/login">
           Account
         </ion-item>
-        <ion-item menu-close href="#/lists/dashboard">
+        <ion-item ng-show="isLoggedIn()" menu-close href="#/lists/dashboard">
           Dashboard
         </ion-item>
-        <ion-item menu-close href="#/lists/grade">
+        <ion-item ng-show="isLoggedIn()" menu-close href="#/lists/grade">
           Grade
         </ion-item>
-        <ion-item menu-close href="#/lists/schedule">
+        <ion-item ng-show="isLoggedIn()" menu-close href="#/lists/schedule">
           Schedule
         </ion-item>
 

@@ -98,9 +98,14 @@ angular.module('controllers', [])
 
 })
 
-.controller('ListCtrl', function($scope,$state, ScheduleService, RealGradeService) {
+.controller('ListCtrl', function($scope,$state, ScheduleService, RealGradeService, LoginService) {
 
 
+
+  $scope.isLoggedIn = function()
+  {
+    return LoginService.loggedIn;
+  };
   // populate grades with random data (list it loaded first, so all menus load)
 
   this.randomInt = function(min,max)
