@@ -155,58 +155,11 @@ angular.module('controllers', [])
               }
 
 
-              /*
-              var classes = [];
-              // always use this when adding a class
-               this.addClass = function(_name, _weights, _grade, _average, _description)
-              {
-                var _class =
-                {
-                  name: 		_name,
-                  weights:    _weights,
-                  grade:    _grade,
-                  average:  _average,
-                  id: 			classes.length,	// farthest id
-                  assignments: 	[],				// empty assignment array
-
-                  // always use when adding assignment to a class
-                  addAssignment: function(_name,_dueDate, _grade, _average, _points, _total, _type, description)
-                  {
-                    var assignment =
-                    {
-                      parent:		this,
-                      id: 		  this.assignments.length,
-                      name: 		_name,
-                      dueDate: 	_dueDate,
-                      grade:  _grade,
-                      average: 	_average,
-                      points:		_points,
-                      total: 	_total,
-                      type: _type,
-                      //schedule vars
-                      classId: "#7cc8e6",
-                      note: "i dont even go here"
-                    };
-                    _class.assignments.push(assignment);
-                    return assignment;
-                  }
-                };
-                classes.push(_class);
-                return _class;			// for ease of use
-              };*/
-
-
-
-
-
-
-
             }
             RealGradeService.populateAssignmentArray();
 
             $scope.dataSet = true;
           }
-
 
 
         },
