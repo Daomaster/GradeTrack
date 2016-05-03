@@ -2,7 +2,14 @@ angular.module('services', [])
   .service('LoginService', function()
   {
     var loggedIn =false;
-    var username = "";
+
+    this.studentInfo = {
+      id: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      username: ""
+    };
   })
 
 .service('ScheduleService', function() {
@@ -126,25 +133,33 @@ angular.module('services', [])
     };
 
     var classes = [];
+    var defaultWeights = [
+      {type: "quiz",      weight: 20},
+      {type: "homework",  weight: 20},
+      {type: "midterm",   weight: 20},
+      {type: "final",     weight: 40}
+    ];
     // always use this when adding a class
-    this.addClass = function(_name, _weights, _grade, _average)
+    this.addClass = function(_name, _weights, _grade, _average, _description)
     {
       var _class =
       {
         name: 		_name,
-        weights:    _weights,
+        weights:    defaultWeights,
         grade:    _grade,
+        description: _description,
         average:  _average,
         id: 			classes.length,	// farthest id
         assignments: 	[],				// empty assignment array
 
         // always use when adding assignment to a class
-        addAssignment: function(_name,_dueDate, _grade, _average, _points, _total, _type)
+        addAssignment: function(_name,_dueDate, _grade, _average, _points, _total, _type, __description)
         {
           var assignment =
           {
             parent:		this,
             id: 		  this.assignments.length,
+            description: __description,
             name: 		_name,
             dueDate: 	_dueDate,
             grade:  _grade,
@@ -180,7 +195,7 @@ angular.module('services', [])
     {
       var total = 0;
       for (var i in _class.assignments) {
-        if (_class.assignments[i].type == category)
+//        if (_class.assignments[i].type == category)
           total += _class.assignments[i].points;
       }
       return total;
@@ -190,7 +205,7 @@ angular.module('services', [])
     {
       var total = 0;
       for (var i in _class.assignments) {
-        if (_class.assignments[i].type == category)
+  //      if (_class.assignments[i].type == category)
           total += _class.assignments[i].total;
       }
       return total;

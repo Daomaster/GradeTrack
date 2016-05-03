@@ -59,7 +59,7 @@ angular.module('controllers', [])
     };
     $scope.loggedInUser = function()
     {
-      return LoginService.username;
+      return LoginService.studentInfo.username;
     };
 
     $scope.logout = function()
@@ -83,7 +83,6 @@ angular.module('controllers', [])
         password: pwd
       };
 
-      console.log(loginInfo);
 
       $http.post("http://localhost:3000/api/auth/signin", loginInfo).then(
         function successCallback() {
@@ -108,16 +107,102 @@ angular.module('controllers', [])
       };
       $http.post("http://localhost:3000/api/info/user", user).then(
         function successCallback(res) {
-            console.log(res);
 
           if (!$scope.dataSet) // debounce
           {
+            // student info
+            LoginService.studentInfo.firstName = res.data.firstName;
+            LoginService.studentInfo.lastName = res.data.lastName;
+            LoginService.studentInfo.id = res.data.id;
+            LoginService.studentInfo.email = res.data.email;
+            LoginService.studentInfo.username = usr;
+
+
+            RealGradeService.classes = [];
             for (var i = 0; i < res.data.courses.length; ++i)
             {
-              var title = res.data.courses[i].title;
+              var course = res.data.courses[i];
               var earned = res.data.courses[i].earned;
-              var c = RealGradeService.addClass(title, [], earned, earned);
+              var total = res.data.courses[i].total;
+              var grade = 0;
+              if (total != 0)
+                grade = earned/total * 100;
+              var c = RealGradeService.addClass(course.title, [], grade, grade, course.description);
+
+
+              for (var key in course.assignments)
+              {
+
+                var assign = course.assignments[key];
+                var _name = assign.title;
+                var _grade = 0;
+                if (assign.total != 0)
+                  _grade = Math.round(assign.earned / assign.total * 100);
+                var due = new Date(assign.due.year + "-" + assign.due.month + "-" + assign.due.day);
+                var points = assign.earned;
+                var _total = assign.total;
+                var weight = "quiz";
+                var descript = assign.description;
+
+
+
+                var ave = 50; // need an average
+
+                var a = c.addAssignment(_name, due, _grade, ave, points, _total, weight, descript);
+
+
+
+              }
+
+
+              /*
+              var classes = [];
+              // always use this when adding a class
+               this.addClass = function(_name, _weights, _grade, _average, _description)
+              {
+                var _class =
+                {
+                  name: 		_name,
+                  weights:    _weights,
+                  grade:    _grade,
+                  average:  _average,
+                  id: 			classes.length,	// farthest id
+                  assignments: 	[],				// empty assignment array
+
+                  // always use when adding assignment to a class
+                  addAssignment: function(_name,_dueDate, _grade, _average, _points, _total, _type, description)
+                  {
+                    var assignment =
+                    {
+                      parent:		this,
+                      id: 		  this.assignments.length,
+                      name: 		_name,
+                      dueDate: 	_dueDate,
+                      grade:  _grade,
+                      average: 	_average,
+                      points:		_points,
+                      total: 	_total,
+                      type: _type,
+                      //schedule vars
+                      classId: "#7cc8e6",
+                      note: "i dont even go here"
+                    };
+                    _class.assignments.push(assignment);
+                    return assignment;
+                  }
+                };
+                classes.push(_class);
+                return _class;			// for ease of use
+              };*/
+
+
+
+
+
+
+
             }
+            RealGradeService.populateAssignmentArray();
 
             $scope.dataSet = true;
           }
@@ -135,7 +220,6 @@ angular.module('controllers', [])
 
       //$$placeholder -- login, retrieve data
       LoginService.loggedIn=true;
-      LoginService.username = $scope.username;
     };
 
   })
@@ -179,24 +263,6 @@ angular.module('controllers', [])
     {type: "midterm",   weight: 20},
     {type: "final",     weight: 40}
   ];
-  for (var j = 0; j < 3; ++j)
-  {
-    var classGrade = this.randomInt(0, 100);//;
-    var classAve =   this.randomInt(0, 100);
-    var c = RealGradeService.addClass("CS" + (450+j), weights, classGrade, classAve);
-    for (var i = 0; i < 5; ++i)
-    {
-      var due = new Date(2016, this.randomInt(0,5),this.randomInt(1,30));
-      var points = this.randomInt(0, 300);
-      var total = this.randomInt(0, 300) + points;
-      var grade = this.randomInt(0, 100);
-      var ave = this.randomInt(0, 100);
-      var weight = weights[this.randomInt(0,4)].type;
-      var a = c.addAssignment("Assignment"+i, due, grade, ave, points, total, weight);
-      a.classId = '#'+Math.floor(Math.random()*16777215).toString(16);
-    }
-  }
-  RealGradeService.populateAssignmentArray();
 
 
 	// Need to use $scope.$on() to listen for events fired by state transitions

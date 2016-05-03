@@ -90,6 +90,6 @@ angular.module('starter', ['ionic', 'controllers', 'services', 'chart.js'])
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/lists/schedule');
+  $urlRouterProvider.otherwise('/lists/login');
 
 });

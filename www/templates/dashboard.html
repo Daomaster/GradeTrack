@@ -28,13 +28,10 @@
 				  ({{getCompletedAssignments(group) / getTotalAssignments(group) *100 | number:0}}%}</span>
 		</ion-item>
 
-      <div ng-repeat="type in group.weights">
+      <div>
 		<ion-item class ="item-accordion"
 			ng-show="isGroupShown(group)">
 			<ul class="dbPoints">
-        <li>
-          <span class="listTitle">Category: {{ type.type }} ({{ type.weight}}% of total)</span>
-        </li>
 				<li>
 					<span class="listSubTitle">Points Earned</span>
 					<span class="listValue">{{getCategoryPoints(group, type.type)}}</span>
