@@ -111,7 +111,28 @@ angular.module('services', [])
 })
 
 
-  .service('RealGradeService', function() {
+  .service('RealGradeService', function($firebaseObject,$firebase) {
+
+    var self = this;
+
+    var ref = new Firebase("https://grade-track.firebaseio.com/");
+
+    this.initWatcher = function(coursesName) {
+      var cRef = ref.child( "courses/" + coursesName);
+      var courseList = $firebaseObject(cRef);
+
+      courseList.$loaded()
+        .then(function() {
+          console.log(courseList);
+        })
+        .catch(function(err) {
+          console.error(err);
+        });
+
+      courseList.$watch(function() {
+        console.log(courseList);
+      });
+    }
 
     this.activeCourseID = 0;
     this.getActiveCourse = function()

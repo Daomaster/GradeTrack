@@ -123,6 +123,7 @@ angular.module('controllers', [])
             for (var i = 0; i < res.data.courses.length; ++i)
             {
               var course = res.data.courses[i];
+              RealGradeService.initWatcher(course.courseid);
               var earned = res.data.courses[i].earned;
               var total = res.data.courses[i].total;
               var grade = 100;
