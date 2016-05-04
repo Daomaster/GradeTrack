@@ -85,7 +85,7 @@ angular.module('controllers', [])
       };
 
 
-      $http.post("http://localhost:3000/api/auth/signin", loginInfo).then(
+      $http.post("https://grade-server.herokuapp.com/api/auth/signin", loginInfo).then(
         function successCallback() {
 
           $scope.postLogin(usr);
@@ -106,7 +106,7 @@ angular.module('controllers', [])
       var user = {
         username: usr
       };
-      $http.post("http://localhost:3000/api/info/user", user).then(
+      $http.post("https://grade-server.herokuapp.com/api/info/user", user).then(
         function successCallback(res) {
 
           if (!$scope.dataSet) // debounce
