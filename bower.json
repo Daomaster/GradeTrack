@@ -5,6 +5,8 @@
     "ionic": "driftyco/ionic-bower#1.2.4"
   },
   "dependencies": {
-    "angular-chart.js": "^0.8.8"
+    "angular-chart.js": "^0.8.8",
+    "firebase": "^2.4.2",
+    "angularfire": "^1.2.0"
   }
 }
