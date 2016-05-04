@@ -110,6 +110,7 @@ angular.module('controllers', [])
 
           if (!$scope.dataSet) // debounce
           {
+            console.log(res.data);
             // student info
             LoginService.studentInfo.firstName = res.data.firstName;
             LoginService.studentInfo.lastName = res.data.lastName;
@@ -124,9 +125,9 @@ angular.module('controllers', [])
               var course = res.data.courses[i];
               var earned = res.data.courses[i].earned;
               var total = res.data.courses[i].total;
-              var grade = 0;
+              var grade = 100;
               if (total != 0)
-                grade = earned/total * 100;
+                grade = Math.round(earned/total * 100);
               var c = RealGradeService.addClass(course.title, [], grade, grade, course.description);
 
 
@@ -135,9 +136,6 @@ angular.module('controllers', [])
 
                 var assign = course.assignments[key];
                 var _name = assign.title;
-                var _grade = 0;
-                if (assign.total != 0)
-                  _grade = Math.round(assign.earned / assign.total * 100);
                 var due = new Date(assign.due.year + "-" + assign.due.month + "-" + assign.due.day);
                 var points = assign.earned;
                 var _total = assign.total;
@@ -146,7 +144,13 @@ angular.module('controllers', [])
 
 
 
-                var ave = 50; // need an average
+                //grades might be wrong
+                var ave = 100;
+                if (assign.total != 0)
+                  ave = Math.round(assign.earned / assign.total * 100);
+                var _grade = 100; // need an average
+                if (assign.total != 0)
+                  _grade = Math.round(parseInt(assign.maxPoint) / assign.total);
 
                 var a = c.addAssignment(_name, due, _grade, ave, points, _total, weight, descript);
 
@@ -183,6 +187,10 @@ angular.module('controllers', [])
     $scope.series = RealGradeService.seriesArray();
     $scope.grades = RealGradeService.compiledGradeArray();
     $scope.yours = RealGradeService.getMyGradeArray();
+
+    $scope.overallPercent = [RealGradeService.getActiveCourse().grade, 100 - RealGradeService.getActiveCourse().grade];
+    $scope.pieLabels = ["Earned", "Missed"];
+    $scope.pieColors = ["#005000", "#500000"]
   })
 
 .controller('GradeCtrl', function($scope, $window, RealGradeService) {
