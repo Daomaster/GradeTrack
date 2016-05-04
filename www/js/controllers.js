@@ -43,6 +43,7 @@ angular.module('controllers', [])
 		promptPopup.then(function(res) {
 			if (res) {
         RealGradeService.setNote(index, res);
+
 			}
 		});
 	};
@@ -130,7 +131,8 @@ angular.module('controllers', [])
               if (total != 0)
                 grade = Math.round(earned/total * 100);
               var c = RealGradeService.addClass(course.title, [], grade, grade, course.description);
-
+              console.log(res.data.courses[i]);
+              c.serverID = course.courseid;
 
               for (var key in course.assignments)
               {
@@ -154,6 +156,7 @@ angular.module('controllers', [])
                   _grade = Math.round(parseInt(assign.maxPoint) / assign.total);
 
                 var a = c.addAssignment(_name, due, _grade, ave, points, _total, weight, descript);
+                a.serverID = key;
 
 
 
@@ -188,6 +191,19 @@ angular.module('controllers', [])
     $scope.series = RealGradeService.seriesArray();
     $scope.grades = RealGradeService.compiledGradeArray();
     $scope.yours = RealGradeService.getMyGradeArray();
+
+    $scope.$watch(function() {
+      return RealGradeService.compiledGradeArray();
+    }, function(newValue, oldValue) {
+      $scope.grades = RealGradeService.compiledGradeArray();
+    }, true);
+
+    $scope.$watch(function() {
+      return RealGradeService.getMyGradeArray();
+    }, function(newValue, oldValue) {
+      $scope.yours = RealGradeService.getMyGradeArray();
+    }, true);
+
 
     $scope.overallPercent = [RealGradeService.getActiveCourse().grade, 100 - RealGradeService.getActiveCourse().grade];
     $scope.pieLabels = ["Earned", "Missed"];

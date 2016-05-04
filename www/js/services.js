@@ -121,16 +121,91 @@ angular.module('services', [])
       var cRef = ref.child( "courses/" + coursesName);
       var courseList = $firebaseObject(cRef);
 
-      courseList.$loaded()
-        .then(function() {
-          console.log(courseList);
-        })
-        .catch(function(err) {
-          console.error(err);
-        });
-
       courseList.$watch(function() {
         console.log(courseList);
+        var res = courseList;
+
+
+        var courseID = res.$id;
+
+
+
+        console.log(classes);
+
+        var i;
+        for (i = 0; i < classes.length; ++i)
+        {
+
+          console.log(classes[i].serverID);
+          console.log(courseID);
+          if (classes[i].serverID == courseID) break;
+        }
+
+        if (i == classes.length)
+        {
+          console.log("Course not found");
+          return;
+        }
+
+
+
+        var className = res.public.title;
+        var classPts = res.public.total;
+        var classEarned = res.public.earned;
+        var classDescrip = res.public.description;
+        classes[i].name = className;
+
+        if (res.public.assignments == null)
+        {
+          console.log("null");
+        }
+        else {
+
+          for (var key in res.public.assignments) {
+            var j;
+            for (j = 0; j < classes[i].assignments.length; ++j) {
+              console.log(classes[i].assignments[j].serverID);
+              console.log(key);
+              if (key == classes[i].assignments[j].serverID)
+                break;
+            }
+            if (j == classes[i].assignments.length) {
+              console.log("Err");
+            }
+            else {
+
+              var assign = res.public.assignments[key];
+              var grade = 100;
+              var ave = 100;
+              var max = parseInt(assign.maxPoint);
+              if (max != 0) {
+                grade = assign.earned / max * 100;
+                ave = assign.total / max * 100;
+              }
+
+              classes[i].assignments[j].name = assign.title;
+              classes[i].assignments[j].description = assign.description;
+              classes[i].assignments[j].points = assign.earned;
+              classes[i].assignments[j].total = parseInt(assign.maxPoint);
+              classes[i].assignments[j].average = ave;
+              classes[i].assignments[j].grade = grade;
+
+
+              classes[i].assignments[j].dueDate = new Date(assign.due.year + "-" + assign.due.month + "-" + assign.due.day);
+            }
+          }
+          /*
+           description: __description,
+           name: 		_name,
+           dueDate: 	_dueDate,
+           grade:  _grade,
+           average: 	_average,
+           points:		_points,
+           total: 	_total,
+           */
+
+        }
+
       });
     }
 
@@ -299,6 +374,8 @@ angular.module('services', [])
     this.getMyGradeArray = function(_class)
     {
       _class = classes[this.activeCourseID];
+
+      console.log(_class);
       var result = [];
       for (var i in _class.assignments)
       {
