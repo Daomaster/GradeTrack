@@ -40,3 +40,7 @@ Then you could start the project by using (use localhost for now!):
 ```bash
 $ ionic serve
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Daomaster/gradetrack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
